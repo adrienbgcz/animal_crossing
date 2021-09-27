@@ -52,19 +52,19 @@ public class BatimentDao extends JdbcDaoSupport {
     }
 
 
-    /*public Batiment updateBatiment(Batiment batiment) {
-        String sql = BatimentMapper.UPDATE_SQL + " SET nom = ?, localisation = ? WHERE id = ?";
+    public Batiment updateBatiment(Batiment batiment) {
+        String sql = BatimentMapper.UPDATE_SQL + " SET nom = ?, id_ile = ?, id_type_batiment = ? WHERE id = ?";
         try {
-            int ile2 = this.getJdbcTemplate().update(sql,new Object[]{ile.getNom(), ile.getLocalisation(), ile.getId()});
-            Ile ileToUpdate = new Ile();
-            ileToUpdate.setNom(ile.getNom());
-            ileToUpdate.setLocalisation(ile.getLocalisation());
-            ileToUpdate.setIdArchipel(ile.getIdArchipel());
-            return ileToUpdate;
+            int batiment2 = this.getJdbcTemplate().update(sql,new Object[]{batiment.getNom(), batiment.getIdIle(), batiment.getIdTypeBatiment(), batiment.getId()});
+            Batiment batimentToUpdate = new Batiment();
+            batimentToUpdate.setNom(batiment.getNom());
+            batimentToUpdate.setIdIle(batiment.getIdIle());
+            batimentToUpdate.setIdTypeBatiment(batiment.getIdTypeBatiment());
+            return batimentToUpdate;
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
-    }*/
+    }
 
 
 }

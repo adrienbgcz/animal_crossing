@@ -99,16 +99,19 @@ public class BatimentController {
                                   @RequestParam("idIle") int idIle,
                                   ModelAndView modelAndView) {
 
-        Batiment batiment = new Batiment(idBatiment, nomBatiment, idTypeBatiment, idIle);
 
-       /* Batiment batimentToUpdate = batimentDao.updateBatiment(batiment);*/
+        Batiment batiment = new Batiment(idBatiment, nomBatiment, idIle, idTypeBatiment);
 
+        Batiment batimentToUpdate = batimentDao.updateBatiment(batiment);
+
+        List<Ile> ile = ileDao.getIleById(idIle);
         List<Batiment> batiments = batimentDao.getBatimentList(idIle);
         List<Cinema> cinemas = cinemaDao.getCinemaList(idIle);
 
         modelAndView = new ModelAndView("batiments");
         modelAndView.addObject("listeBatiments", batiments);
         modelAndView.addObject("listeCinemas", cinemas);
+        modelAndView.addObject("nomIleAfterCreation", ile.get(0).getNom());
 
         return modelAndView;
     }

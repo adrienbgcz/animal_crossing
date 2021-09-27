@@ -35,7 +35,8 @@
                                      <option value="1">Magasin</option>
                                      <option value="2">Ecole</option>
                                  </select>
-                                 <input type"hidden" value="idBatimentToUpdate">
+                                 <input type="hidden" value="${idBatimentToUpdate}" name="idBatimentToUpdate">
+                                 <input type="hidden" value="${item.idIle}" name="idIle">
                               <input type="submit" value="Valider" >
                            </form>
                           </div>
