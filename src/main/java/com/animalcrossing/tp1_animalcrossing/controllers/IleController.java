@@ -105,10 +105,7 @@ public class IleController {
                                   @RequestParam("idIle") int idIle,
                                   ModelAndView modelAndView) {
 
-
         Ile ile = new Ile(idIle);
-
-
 
         int ileToDelete = ileDao.deleteIle(ile);
 

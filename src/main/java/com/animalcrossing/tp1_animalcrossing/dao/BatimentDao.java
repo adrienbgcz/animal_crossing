@@ -66,6 +66,16 @@ public class BatimentDao extends JdbcDaoSupport {
         }
     }
 
+    public int deleteBatiment(Batiment batiment) {
+        String sql = BatimentMapper.DELETE_SQL + " WHERE id = ?";
+        try {
+            int batiment2 = this.getJdbcTemplate().update(sql,new Object[]{batiment.getId()});
+            return batiment2 ;
+        } catch (EmptyResultDataAccessException e) {
+            return 0;
+        }
+    }
+
 
 }
 

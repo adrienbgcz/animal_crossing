@@ -55,7 +55,6 @@ public class IleDao extends JdbcDaoSupport {
         String sql = IleMapper.DELETE_SQL + " WHERE id = ?";
         try {
             int ile2 = this.getJdbcTemplate().update(sql,new Object[]{ile.getId()});
-            System.out.println(ile2);
             return ile2 ;
         } catch (EmptyResultDataAccessException e) {
             return 0;

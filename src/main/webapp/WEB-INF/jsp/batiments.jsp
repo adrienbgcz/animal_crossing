@@ -28,8 +28,9 @@
                             <input type="submit" value="Modifier">
                         </form>
 
-                        <form method="POST" action="deleteIle">
-                            <input type="hidden" name="idBatiment" value="${item.id}">
+                        <form method="POST" action="deleteBatiment">
+                            <input type="text" name="idBatiment" value="${item.id}">
+                            <input type="text" name="idIle" value="${item.idIle}">
                             <input type="submit" value="Supprimer" onclick="displayConfirm()">
                         </form>
 
@@ -87,6 +88,13 @@
                     <input type="hidden" name="idIle" value="<%= request.getParameter("idIle") %>">
                     <input type="submit" value="Valider">
                 </form>
+
+         <script>
+            function displayConfirm() {
+                let resultat = window.confirm("Souhaitez-vous vraiment supprimer ce bâtiment ?");
+            }
+         </script>
+
 
 
         <style>

@@ -36,6 +36,10 @@ public class Batiment {
     public Batiment() {
     }
 
+    public Batiment(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

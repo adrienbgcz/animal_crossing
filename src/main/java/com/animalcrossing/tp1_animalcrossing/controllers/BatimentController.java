@@ -115,4 +115,28 @@ public class BatimentController {
 
         return modelAndView;
     }
+
+
+    @PostMapping("deleteBatiment")
+    public ModelAndView deleteBatiment(@RequestParam("idBatiment") int idBatiment,
+                                  @RequestParam("idIle") int idIle,
+                                  ModelAndView modelAndView) {
+
+        System.out.println(idBatiment);
+        Batiment batiment = new Batiment(idBatiment);
+
+
+        int batimentToDelete = batimentDao.deleteBatiment(batiment);
+
+        List<Ile> ile = ileDao.getIleById(idIle);
+        List<Batiment> batiments = batimentDao.getBatimentList(idIle);
+        List<Cinema> cinemas = cinemaDao.getCinemaList(idIle);
+
+        modelAndView = new ModelAndView("batiments");
+        modelAndView.addObject("listeBatiments", batiments);
+        modelAndView.addObject("listeCinemas", cinemas);
+        modelAndView.addObject("nomIleAfterCreation", ile.get(0).getNom());
+
+        return modelAndView;
+    }
 }
