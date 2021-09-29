@@ -25,11 +25,11 @@ public class FilmDao extends JdbcDaoSupport {
     }
 
 
-    public List<Film> getFilmsByCinema(int idIle) {
-        String sql = FilmMapper.BASE_SQL + "WHERE id_ile = ? GROUP BY film.id, titre";
+    public List<Film> getFilmsByCinema(int idCinema) {
+        String sql = FilmMapper.BASE_SQL + "WHERE id_cinema = ? GROUP BY film.id, film.titre";
         try {
             List<Film> filmList = new ArrayList<>();
-            filmList = this.getJdbcTemplate().query(sql, new FilmMapper(), idIle);
+            filmList = this.getJdbcTemplate().query(sql, new FilmMapper(), idCinema);
             return filmList;
         } catch (EmptyResultDataAccessException e) {
             return null;

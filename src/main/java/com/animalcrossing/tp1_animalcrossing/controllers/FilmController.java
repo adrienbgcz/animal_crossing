@@ -25,8 +25,8 @@ public class FilmController {
     }
 
     @GetMapping("getFilmsByCinema")
-    public ModelAndView getFilmsByCinema(@RequestParam("idIle") int idIle, @RequestParam("nomCinema") String nomCinema, ModelAndView modelAndView) {
-        List<Film> listeFilms = filmDao.getFilmsByCinema(idIle);
+    public ModelAndView getFilmsByCinema(@RequestParam("idCinema") int idCinema, @RequestParam("nomCinema") String nomCinema, ModelAndView modelAndView) {
+        List<Film> listeFilms = filmDao.getFilmsByCinema(idCinema);
         modelAndView = new ModelAndView("filmsAffiche");
         modelAndView.addObject("listeFilms", listeFilms);
         modelAndView.addObject("nomCinema", nomCinema);

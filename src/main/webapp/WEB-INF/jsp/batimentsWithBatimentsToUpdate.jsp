@@ -70,14 +70,27 @@
                 <div class="cardsContainer">
                    <p><c:forEach items="${listeCinemas}" var="item">
                       <div class="card">
-                        <p>Nom : <c:out value="${item.nom} " /></p>
-                        <p>Nombre de places : <c:out value="${item.nombrePlaces}" /></p>
-                        <form methode="POST" action="getFilmsByCinema">
-                            <input type="hidden" value="${item.id}" name="idCinema" >
-                            <input type="hidden" name="idIle" value="<%= request.getParameter("idIle") %>">
-                            <input type="hidden" value="${item.nom}" name="nomCinema" >
-                            <input type="submit" value="Films à l'affiche" >
-                        </form>
+                        <c:if test="${item.id != idCinemaToUpdate}">
+                            <p>Nom : <c:out value="${item.nom} " /></p>
+                            <p>Nombre de places : <c:out value="${item.nombrePlaces}" /></p>
+
+                            <form methode="POST" action="getFilmsByCinema">
+                                <input type="hidden" value="${item.id}" name="idCinema" >
+                                <input type="hidden" name="idIle" value="<%= request.getParameter("idIle") %>">
+                                <input type="hidden" value="${item.nom}" name="nomCinema" >
+                                <input type="submit" value="Films à l'affiche" >
+                            </form>
+                        </c:if>
+
+                        <c:if test="${item.id == idCinemaToUpdate}">
+                            <form method="POST" action="updateCinema" >
+                                <p>Nom : <input type="text" value='<c:out value="${item.nom}"/>' name="nomCinemaToUpdate"/></p>
+                                <p>Nombre de places : <input type="text" value='<c:out value="${item.nombrePlaces}"/>' name="placesCinemaToUpdate" /></p>
+                                <input type="hidden" value="${item.idIle}" name="idIle">
+                                <input type="hidden" value="${item.id}" name="idCinemaToUpdate">
+                                <input type="submit" value="Valider">
+                            </form>
+                        </c:if>
                       </div>
                    </c:forEach></p>
                 </div>

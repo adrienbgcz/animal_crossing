@@ -29,8 +29,8 @@
                         </form>
 
                         <form method="POST" action="deleteBatiment">
-                            <input type="text" name="idBatiment" value="${item.id}">
-                            <input type="text" name="idIle" value="${item.idIle}">
+                            <input type="hidden" name="idBatiment" value="${item.id}">
+                            <input type="hidden" name="idIle" value="${item.idIle}">
                             <input type="submit" value="Supprimer" onclick="displayConfirm()">
                         </form>
 
@@ -71,6 +71,19 @@
                             <input type="hidden" value="${item.nom}" name="nomCinema" >
                             <input type="submit" value="Films à l'affiche" >
                         </form>
+
+                        <form method="POST" action="displayUpdateCinema">
+                            <input type="hidden" name="idCinema" value="${item.id}">
+                            <input type="hidden" name="idIle" value="${item.idIle}">
+                            <input type="submit" value="Modifier">
+                        </form>
+
+                        <form method="POST" action="deleteCinema">
+                            <input type="hidden" name="idCinema" value="${item.id}">
+                            <input type="hidden" name="idIle" value="${item.idIle}">
+                            <input type="submit" value="Supprimer" onclick="displayConfirm()">
+                        </form>
+
                       </div>
                    </c:forEach></p>
                 </div>
@@ -91,7 +104,7 @@
 
          <script>
             function displayConfirm() {
-                let resultat = window.confirm("Souhaitez-vous vraiment supprimer ce bâtiment ?");
+                const resultat = window.confirm("Souhaitez-vous vraiment supprimer ce bâtiment ?");
             }
          </script>
 

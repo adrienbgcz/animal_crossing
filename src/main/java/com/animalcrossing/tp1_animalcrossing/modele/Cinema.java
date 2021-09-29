@@ -33,6 +33,10 @@ public class Cinema {
         this.idIle = idIle;
     }
 
+    public Cinema(int id) {
+        this.id = id;
+    }
+
 
     public int getId() {
         return id;

@@ -50,6 +50,33 @@ public class CinemaDao extends JdbcDaoSupport {
         }
     }
 
+    public Cinema updateCinema(Cinema cinema) {
+        String sql = CinemaMapper.UPDATE_SQL + " SET nom = ?, nombre_places = ?, id_ile = ? WHERE id = ?";
+        try {
+            int cinema2 = this.getJdbcTemplate().update(sql,new Object[]{cinema.getNom(), cinema.getNombrePlaces(), cinema.getIdIle(), cinema.getId()});
+            Cinema cinemaToUpdate = new Cinema();
+            cinemaToUpdate.setNom(cinema.getNom());
+            cinemaToUpdate.setNombrePlaces(cinema.getNombrePlaces());
+            cinemaToUpdate.setIdIle(cinema.getIdIle());
+            cinemaToUpdate.setId(cinema.getId());
+            return cinemaToUpdate;
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
+    public int deleteCinema(Cinema cinema) {
+        String sql = CinemaMapper.DELETE_SQL + " WHERE id = ?";
+        try {
+            int cinema2 = this.getJdbcTemplate().update(sql,new Object[]{cinema.getId()});
+            return cinema2 ;
+        } catch (EmptyResultDataAccessException e) {
+            return 0;
+        }
+    }
+
+
+
 
     /*public Batiment createBatiment(Batiment batiment) {
         String sql = BatimentMapper.CREATE_SQL + " VALUES (?,?,?)";

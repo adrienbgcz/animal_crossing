@@ -65,4 +65,69 @@ public class CinemaController {
 
         return modelAndView;
     }
+
+
+    @PostMapping("displayUpdateCinema")
+    public ModelAndView displayUpdateCinema(@RequestParam("idCinema") int idCinemaToUpdate,
+                                              @RequestParam("idIle") int idIle,
+                                              ModelAndView modelAndView) {
+
+        List<Batiment> batiments = batimentDao.getBatimentList(idIle);
+        List<Cinema> cinemas = cinemaDao.getCinemaList(idIle);
+        List<Ile> ile = ileDao.getIleById(idIle);
+
+
+        modelAndView = new ModelAndView("batimentsWithBatimentsToUpdate");
+        modelAndView.addObject("listeBatiments", batiments);
+        modelAndView.addObject("listeCinemas", cinemas);
+        modelAndView.addObject("idCinemaToUpdate", idCinemaToUpdate);
+        modelAndView.addObject("nomIleAfterCreation", ile.get(0).getNom());
+        return modelAndView;
+    }
+
+    @PostMapping("updateCinema")
+    public ModelAndView updateCinema(@RequestParam("idCinemaToUpdate") int idCinema,
+                                       @RequestParam("nomCinemaToUpdate") String nomBatiment,
+                                       @RequestParam("placesCinemaToUpdate") int nombrePlaces,
+                                       @RequestParam("idIle") int idIle,
+                                       ModelAndView modelAndView) {
+
+
+        Cinema cinema = new Cinema(idCinema, nomBatiment, nombrePlaces, idIle);
+
+        Cinema cinemaToUpdate = cinemaDao.updateCinema(cinema);
+
+        List<Ile> ile = ileDao.getIleById(idIle);
+        List<Batiment> batiments = batimentDao.getBatimentList(idIle);
+        List<Cinema> cinemas = cinemaDao.getCinemaList(idIle);
+
+        modelAndView = new ModelAndView("batiments");
+        modelAndView.addObject("listeBatiments", batiments);
+        modelAndView.addObject("listeCinemas", cinemas);
+        modelAndView.addObject("nomIleAfterCreation", ile.get(0).getNom());
+
+        return modelAndView;
+    }
+
+    @PostMapping("deleteCinema")
+    public ModelAndView deleteCinema(@RequestParam("idCinema") int idCinema,
+                                     @RequestParam("idIle") int idIle,
+                                     ModelAndView modelAndView) {
+
+        Cinema cinema = new Cinema(idCinema);
+
+
+        int batimentToDelete = cinemaDao.deleteCinema(cinema);
+
+        List<Ile> ile = ileDao.getIleById(idIle);
+        List<Batiment> batiments = batimentDao.getBatimentList(idIle);
+        List<Cinema> cinemas = cinemaDao.getCinemaList(idIle);
+
+        modelAndView = new ModelAndView("batiments");
+        modelAndView.addObject("listeBatiments", batiments);
+        modelAndView.addObject("listeCinemas", cinemas);
+        modelAndView.addObject("nomIleAfterCreation", ile.get(0).getNom());
+
+        return modelAndView;
+    }
 }
