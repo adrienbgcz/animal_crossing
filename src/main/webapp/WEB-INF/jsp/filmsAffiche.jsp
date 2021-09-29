@@ -16,10 +16,24 @@
                  <p><c:forEach items="${listeFilms}" var="item">
                    <div class="card">
                      <p>Nom : <c:out value="${item.titre} " /></p>
-
+                     <p>Tickets restants : <c:out value="${item.ticketsRestants}" /></p>
                    </div>
                 </c:forEach></p>
              </div>
+
+          <h3>Ajouter un film</h3>
+              <form method="POST" action="addFilm">
+                    <p>
+                         <label for="film">Sélectionnez un film à ajouter</label><br />
+                         <select name="filmToAdd" id="film">
+                             <c:forEach items="${allFilms}" var="item">
+                                <option value="item.id"><c:out value="${item.titre}"/></option>
+                             </c:forEach>
+                         </select>
+                     </p>
+                  <input type="hidden" value="${idCinema}" >
+                  <input type="submit" value="Valider">
+              </form>
     </body>
 
      <style>

@@ -12,7 +12,9 @@ import java.util.List;
 
 public class FilmMapper implements RowMapper<Film> {
 
-    public static final String BASE_SQL = "SELECT film.id, film.titre FROM film " +
+    public static final String BASE_SQL = "SELECT film.id, film.titre FROM film";
+
+    public static final String FILMS_BY_CINEMA_SQL = "SELECT film.id, film.titre FROM film " +
     "JOIN cinema_film ON film.id = cinema_film.id_film " +
     "JOIN cinema ON cinema_film.id_cinema = cinema.id ";
 

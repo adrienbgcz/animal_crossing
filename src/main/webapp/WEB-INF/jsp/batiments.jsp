@@ -65,7 +65,7 @@
                       <div class="card">
                         <p>Nom : <c:out value="${item.nom} " /></p>
                         <p>Nombre de places : <c:out value="${item.nombrePlaces}" /></p>
-                        <form methode="POST" action="getFilmsByCinema">
+                        <form method="POST" action="getFilmsByCinema">
                             <input type="hidden" value="${item.id}" name="idCinema" >
                             <input type="hidden" name="idIle" value="<%= request.getParameter("idIle") %>">
                             <input type="hidden" value="${item.nom}" name="nomCinema" >

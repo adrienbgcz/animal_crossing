@@ -3,7 +3,9 @@ package com.animalcrossing.tp1_animalcrossing.controllers;
 import com.animalcrossing.tp1_animalcrossing.dao.CinemaDao;
 import com.animalcrossing.tp1_animalcrossing.dao.FilmDao;
 import com.animalcrossing.tp1_animalcrossing.dao.IleDao;
+import com.animalcrossing.tp1_animalcrossing.map.FilmsWithTicketsMapper;
 import com.animalcrossing.tp1_animalcrossing.modele.Film;
+import com.animalcrossing.tp1_animalcrossing.modele.FilmsWithTickets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
@@ -24,12 +26,17 @@ public class FilmController {
         this.filmDao = filmDao;
     }
 
+
     @GetMapping("getFilmsByCinema")
     public ModelAndView getFilmsByCinema(@RequestParam("idCinema") int idCinema, @RequestParam("nomCinema") String nomCinema, ModelAndView modelAndView) {
-        List<Film> listeFilms = filmDao.getFilmsByCinema(idCinema);
+        List<Film> allFilms = filmDao.getAllFilms();
+
+        List<FilmsWithTickets> listeFilms = filmDao.getFilmsByCinema(idCinema);
         modelAndView = new ModelAndView("filmsAffiche");
         modelAndView.addObject("listeFilms", listeFilms);
         modelAndView.addObject("nomCinema", nomCinema);
+        modelAndView.addObject("allFilms", allFilms);
+        modelAndView.addObject("idCinema", idCinema);
 
         return modelAndView;
     }

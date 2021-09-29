@@ -1,16 +1,11 @@
 package com.animalcrossing.tp1_animalcrossing.modele;
 
-public class Film {
+public class FilmsWithTickets {
     private int id;
     private String titre;
     private int ticketsRestants;
 
-    public Film(int id, String titre) {
-        this.id = id;
-        this.titre = titre;
-    }
-
-    public Film(int id, String titre, int ticketsRestants) {
+    public FilmsWithTickets(int id, String titre, int ticketsRestants) {
         this.id = id;
         this.titre = titre;
         this.ticketsRestants = ticketsRestants;
