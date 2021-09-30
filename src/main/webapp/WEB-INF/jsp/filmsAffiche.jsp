@@ -22,17 +22,22 @@
              </div>
 
           <h3>Ajouter un film</h3>
-              <form method="POST" action="addFilm">
+              <form method="POST" action="addFilmToCinema">
                     <p>
                          <label for="film">Sélectionnez un film à ajouter</label><br />
-                         <select name="filmToAdd" id="film">
+                         <select name="idFilmToAdd" id="film">
+
                              <c:forEach items="${allFilms}" var="item">
-                                <option value="item.id"><c:out value="${item.titre}"/></option>
+                                 <option value="${item.id}"><c:out value="${item.titre}"/></option>
                              </c:forEach>
                          </select>
                      </p>
-                  <input type="hidden" value="${idCinema}" >
+                  <input type="hidden" value="${idCinema}" name="idCinemaToAdd">
+                  <input type="hidden" value="${nomCinema}" name="nomCinema" >
                   <input type="submit" value="Valider">
+                  <c:if test="${!empty messageErreur}">
+                    <p><c:out value="${messageErreur}" /></p>
+                  </c:if>
               </form>
     </body>
 

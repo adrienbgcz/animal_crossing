@@ -4,10 +4,10 @@ import com.animalcrossing.tp1_animalcrossing.dao.CinemaDao;
 import com.animalcrossing.tp1_animalcrossing.dao.FilmDao;
 import com.animalcrossing.tp1_animalcrossing.dao.IleDao;
 import com.animalcrossing.tp1_animalcrossing.map.FilmsWithTicketsMapper;
-import com.animalcrossing.tp1_animalcrossing.modele.Film;
-import com.animalcrossing.tp1_animalcrossing.modele.FilmsWithTickets;
+import com.animalcrossing.tp1_animalcrossing.modele.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +27,7 @@ public class FilmController {
     }
 
 
-    @GetMapping("getFilmsByCinema")
+    @PostMapping("getFilmsByCinema")
     public ModelAndView getFilmsByCinema(@RequestParam("idCinema") int idCinema, @RequestParam("nomCinema") String nomCinema, ModelAndView modelAndView) {
         List<Film> allFilms = filmDao.getAllFilms();
 
@@ -39,6 +39,45 @@ public class FilmController {
         modelAndView.addObject("idCinema", idCinema);
 
         return modelAndView;
+    }
+
+    @PostMapping("addFilmToCinema")
+    public ModelAndView addFilmToCinema(@RequestParam("idFilmToAdd") int idFilm,
+                                        @RequestParam("idCinemaToAdd") int idCinema,
+                                        @RequestParam("nomCinema") String nomCinema,
+                                        ModelAndView modelAndView) {
+
+        CinemaFilm cinemaFilm = new CinemaFilm(idCinema, idFilm);
+
+        List<CinemaFilm> cinemaFilmToCompare = filmDao.getCinemaFilmList(cinemaFilm);
+
+        if (cinemaFilmToCompare.isEmpty()) {
+            CinemaFilm cinemaFilmToAdd = filmDao.addFilm(cinemaFilm);
+
+            List<FilmsWithTickets> films = filmDao.getFilmsByCinema(idCinema);
+            List<Film> allFilms = filmDao.getAllFilms();
+
+            modelAndView = new ModelAndView("filmsAffiche");
+            modelAndView.addObject("listeFilms", films);
+            modelAndView.addObject("nomCinema", nomCinema);
+            modelAndView.addObject("allFilms", allFilms);
+            modelAndView.addObject("idCinema", idCinema);
+            return modelAndView;
+        } else {
+
+            List<FilmsWithTickets> films = filmDao.getFilmsByCinema(idCinema);
+            List<Film> allFilms = filmDao.getAllFilms();
+            String messageErreur = "Ce film est déjà à l'affiche";
+
+            modelAndView = new ModelAndView("filmsAffiche");
+            modelAndView.addObject("listeFilms", films);
+            modelAndView.addObject("nomCinema", nomCinema);
+            modelAndView.addObject("allFilms", allFilms);
+            modelAndView.addObject("idCinema", idCinema);
+            modelAndView.addObject("messageErreur", messageErreur);
+
+            return modelAndView;
+        }
     }
 
 
